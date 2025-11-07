@@ -1,0 +1,260 @@
+{% extends 'store/base.html' %}
+
+{% block title %}Contact | {% endblock %}
+
+{% block content %}
+
+<!-- ===== CONTACT PAGE STYLES ===== -->
+<style>
+    body {
+        background: radial-gradient(circle at top left, #ff7eb3, #8e44ad, #2c3e50);
+        font-family: 'Poppins', sans-serif;
+        overflow-x: hidden;
+        color: #333;
+    }
+
+    /* floating circles background */
+    .floating-bg span {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.08);
+        animation: float 8s infinite ease-in-out;
+        z-index: 0;
+    }
+
+    .floating-bg span:nth-child(1) {
+        width: 200px; height: 200px; left: 10%; top: 15%; animation-delay: 0s;
+    }
+    .floating-bg span:nth-child(2) {
+        width: 150px; height: 150px; left: 70%; top: 10%; animation-delay: 1s;
+    }
+    .floating-bg span:nth-child(3) {
+        width: 300px; height: 300px; left: 40%; top: 70%; animation-delay: 2s;
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-25px) scale(1.1); }
+    }
+
+    /* main content */
+    .contact-wrapper {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: calc(100vh - 100px);
+        padding: 60px 20px;
+    }
+
+    .contact-card {
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+        max-width: 1100px;
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+        animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* left info panel */
+    .contact-info {
+        flex: 1 1 45%;
+        background: linear-gradient(180deg, #8e44ad, #3498db);
+        color: white;
+        padding: 50px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-info::before {
+        content: "";
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        background: rgba(255,255,255,0.08);
+        border-radius: 50%;
+        top: -150px;
+        right: -200px;
+        animation: pulse 6s infinite alternate;
+    }
+
+    @keyframes pulse {
+        from { transform: scale(1); opacity: 0.6; }
+        to { transform: scale(1.2); opacity: 1; }
+    }
+
+    .contact-info h2 {
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .contact-info p {
+        color: rgba(255,255,255,0.9);
+    }
+
+    .contact-info i {
+        color: #ffe600;
+        margin-right: 8px;
+    }
+
+    /* right form panel */
+    .contact-form {
+        flex: 1 1 55%;
+        padding: 50px 40px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .contact-form h3 {
+        font-weight: 600;
+        margin-bottom: 25px;
+        color: #2c3e50;
+    }
+
+    .form-control {
+        border-radius: 10px;
+        padding: 12px;
+    }
+
+    .form-control:focus {
+        border-color: #8e44ad;
+        box-shadow: 0 0 0 0.25rem rgba(142,68,173,0.25);
+    }
+
+    .btn-send {
+        background: linear-gradient(135deg, #8e44ad, #3498db);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        font-size: 1.1rem;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(142,68,173,0.3);
+    }
+
+    .btn-send:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, #3498db, #8e44ad);
+        box-shadow: 0 10px 25px rgba(142,68,173,0.4);
+    }
+
+    /* icons row */
+    .social-icons {
+        margin-top: 20px;
+    }
+
+    .social-icons a {
+        color: white;
+        font-size: 1.5rem;
+        margin-right: 15px;
+        transition: 0.3s;
+    }
+
+    .social-icons a:hover {
+        color: #ffe600;
+        transform: scale(1.2);
+    }
+
+    /* floating emoji */
+    .floating-symbol {
+        position: absolute;
+        font-size: 2rem;
+        color: rgba(255,255,255,0.3);
+        animation: floatY 5s ease-in-out infinite;
+    }
+
+    @keyframes floatY {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    .floating-symbol:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; }
+    .floating-symbol:nth-child(2) { top: 80%; left: 85%; animation-delay: 2s; }
+    .floating-symbol:nth-child(3) { top: 25%; left: 70%; animation-delay: 1s; }
+
+    @media (max-width: 992px) {
+        .contact-card { flex-direction: column; }
+        .contact-info, .contact-form { flex: 1 1 100%; }
+    }
+</style>
+
+<!-- ===== BACKGROUND DECORATIONS ===== -->
+<div class="floating-bg">
+    <span></span><span></span><span></span>
+</div>
+
+<div class="floating-symbol">💌</div>
+<div class="floating-symbol">⭐</div>
+<div class="floating-symbol">💫</div>
+
+<!-- ===== CONTACT SECTION ===== -->
+<div class="contact-wrapper">
+    <div class="contact-card">
+
+        <!-- Left info panel -->
+        <div class="contact-info">
+            <h2><i class="bi bi-chat-dots-fill"></i> ¡Hablemos!</h2>
+            <p>¿Tienes preguntas sobre nuestros productos, envíos o promociones?  
+               Escríbenos y nuestro equipo te responderá en menos de 24 horas.</p>
+
+            <p class="mt-4"><i class="bi bi-telephone-fill"></i> +57 320 555 1234</p>
+            <p><i class="bi bi-envelope-fill"></i> contacto@mitienda.com</p>
+            <p><i class="bi bi-geo-alt-fill"></i> Calle 123 #45-67, Bogotá, Colombia</p>
+
+            <div class="social-icons mt-3">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <!-- Right form -->
+        <div class="contact-form">
+            <h3><i class="bi bi-envelope-paper-heart"></i> Envíanos un mensaje</h3>
+            <form method="post" action="#">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre completo</label>
+                    <input type="text" id="name" name="name" class="form-control" placeholder="Tu nombre" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="email" class="form-label">Correo electrónico</label>
+                    <input type="email" id="email" name="email" class="form-control" placeholder="tucorreo@ejemplo.com" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="subject" class="form-label">Asunto</label>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Motivo del mensaje" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="message" class="form-label">Mensaje</label>
+                    <textarea id="message" name="message" class="form-control" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-send">
+                    <i class="bi bi-send-fill me-2"></i>Enviar mensaje
+                </button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
